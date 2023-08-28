@@ -15,6 +15,8 @@ namespace FleetManagement_MW.Models
 
         public DateTime rateValidity { get; set; }
 
+        public CarMaster car { get; set; }
         public long carId { get; set; }
+       
     }
 }
