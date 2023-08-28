@@ -58,7 +58,97 @@ namespace FleetManagement_MW.Models
              .HasForeignKey(a => a.hubId)
            .OnDelete(DeleteBehavior.Restrict);
 
+          modelBuilder.Entity<BookingDetails>()
+                .HasOne(bd => bd.addoni)
+                .WithMany()
+                .HasForeignKey(bd => bd.addOnId)
+                .OnDelete(DeleteBehavior.Restrict);
 
+            modelBuilder.Entity<BookingDetails>()
+                .HasOne(bd => bd.addonr)
+                .WithMany()
+                .HasForeignKey(bd => bd.addOnId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<BookingHeaderReservation>()
+                .HasOne(br => br.cust)
+                .WithMany()
+                .HasForeignKey(br => br.customerId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<BookingHeaderReservation>()
+               .HasOne(br => br.carType)
+               .WithMany()
+               .HasForeignKey(br => br.carTypeId)
+               .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<CarMaster>()
+               .HasOne(cm => cm.carType)
+               .WithMany()
+               .HasForeignKey(cm => cm.carTypeId)
+               .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<CarMaster>()
+               .HasOne(cm => cm.hub)
+               .WithMany()
+               .HasForeignKey(cm => cm.hubId)
+               .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<CarTypeMaster>()
+               .HasOne(ct => ct.hub)
+               .WithMany()
+               .HasForeignKey(ct => ct.hubId)
+               .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<InvoiceDetailTableReturn>()
+               .HasOne(ir => ir.invoice)
+               .WithMany()
+               .HasForeignKey(ir => ir.invoiceId)
+               .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<InvoiceHeaderTableHandover>()
+               .HasOne(th => th.booking)
+               .WithMany()
+               .HasForeignKey(th => th.bookingId)
+               .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<InvoiceHeaderTableHandover>()
+                           .HasOne(th => th.cust)
+                           .WithMany()
+                           .HasForeignKey(th => th.customerId)
+                           .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<InvoiceHeaderTableHandover>()
+               .HasOne(th => th.car)
+               .WithMany()
+               .HasForeignKey(th=> th.carId)
+               .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<MembershipRegistration>()
+               .HasOne(mr => mr.cust)
+               .WithMany()
+               .HasForeignKey(mr => mr.customerId)
+               .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<MembershipRegistration>()
+               .HasOne(mr => mr.carType)
+               .WithMany()
+               .HasForeignKey(mr => mr.carTypeId)
+               .OnDelete(DeleteBehavior.Restrict);
+
+
+
+            modelBuilder.Entity<CustomerMaster>()
+                .HasOne(cu => cu.city)
+                .WithMany()
+                .HasForeignKey(cu => cu.cityId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<CustomerMaster>()
+              .HasOne(cu => cu.state)
+              .WithMany()
+              .HasForeignKey(cu => cu.stateId)
+          .OnDelete(DeleteBehavior.Restrict);
         }
 
         private void OnDelete(DeleteBehavior restrict)
@@ -70,5 +160,21 @@ namespace FleetManagement_MW.Models
         public DbSet<StateMaster> StateMaster { get; set; }
 
         public DbSet<HubMaster> HubMaster { get; set; }
+
+        public DbSet<CustomerMaster> CustomerMaster { get; set; }
+
+        public DbSet<AirportMaster> AirportMaster { get; set;}
+        public DbSet<BookingDetails> BookingDetails { get; set; }
+
+        public DbSet<BookingHeaderReservation> BookingHeaderReservations { get; set; }
+
+        public DbSet<CarMaster> CarMasters { get; set; }    
+
+        public DbSet<CarTypeMaster> CarTypeMaster { get; set; }
+        public DbSet<AddOnMaster> AddOnMaster { get; set; } 
+        public DbSet<InvoiceDetailTableReturn> InvoiceDetailTableReturn { get;}
+        public DbSet<InvoiceHeaderTableHandover> InvoiceHeaderTableHandover { get; set; }
+        public DbSet<MembershipRegistration> MembershipRegistration { get; set; }   
+
     }
 }
