@@ -4,7 +4,7 @@ namespace FleetManagement_MW.Models
 {
     public class CityMaster
     {
-        [Key]
+        [Key] 
         public long cityId { get; set; }
         public string cityName { get; set; }
         // Other properties

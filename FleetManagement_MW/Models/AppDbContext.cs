@@ -59,16 +59,16 @@ namespace FleetManagement_MW.Models
            .OnDelete(DeleteBehavior.Restrict);
 
           modelBuilder.Entity<BookingDetails>()
-                .HasOne(bd => bd.addoni)
+                .HasOne(bd => bd.booking)
                 .WithMany()
-                .HasForeignKey(bd => bd.addOnId)
+                .HasForeignKey(bd => bd.bookingId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<BookingDetails>()
-                .HasOne(bd => bd.addonr)
+          modelBuilder.Entity<BookingDetails>()
+                .HasOne(bd => bd.addOn)
                 .WithMany()
                 .HasForeignKey(bd => bd.addOnId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Restrict); 
 
             modelBuilder.Entity<BookingHeaderReservation>()
                 .HasOne(br => br.cust)
@@ -138,7 +138,7 @@ namespace FleetManagement_MW.Models
 
 
 
-            modelBuilder.Entity<CustomerMaster>()
+          /*  modelBuilder.Entity<CustomerMaster>()
                 .HasOne(cu => cu.city)
                 .WithMany()
                 .HasForeignKey(cu => cu.cityId)
@@ -148,7 +148,7 @@ namespace FleetManagement_MW.Models
               .HasOne(cu => cu.state)
               .WithMany()
               .HasForeignKey(cu => cu.stateId)
-          .OnDelete(DeleteBehavior.Restrict);
+          .OnDelete(DeleteBehavior.Restrict);*/
         }
 
         private void OnDelete(DeleteBehavior restrict)
@@ -156,25 +156,25 @@ namespace FleetManagement_MW.Models
             throw new NotImplementedException();
         }
 
-        public DbSet<CityMaster> CityMaster { get; set; }
-        public DbSet<StateMaster> StateMaster { get; set; }
+        public DbSet<CityMaster> CityMasters { get; set; }
+        public DbSet<StateMaster> StateMasters { get; set; }
 
-        public DbSet<HubMaster> HubMaster { get; set; }
+        public DbSet<HubMaster> HubMasters { get; set; }
 
-        public DbSet<CustomerMaster> CustomerMaster { get; set; }
+        public DbSet<CustomerMaster> CustomerMasters { get; set; }
 
-        public DbSet<AirportMaster> AirportMaster { get; set;}
+        public DbSet<AirportMaster> AirportMasters { get; set;}
         public DbSet<BookingDetails> BookingDetails { get; set; }
 
         public DbSet<BookingHeaderReservation> BookingHeaderReservations { get; set; }
 
         public DbSet<CarMaster> CarMasters { get; set; }    
 
-        public DbSet<CarTypeMaster> CarTypeMaster { get; set; }
-        public DbSet<AddOnMaster> AddOnMaster { get; set; } 
-        public DbSet<InvoiceDetailTableReturn> InvoiceDetailTableReturn { get;}
-        public DbSet<InvoiceHeaderTableHandover> InvoiceHeaderTableHandover { get; set; }
-        public DbSet<MembershipRegistration> MembershipRegistration { get; set; }   
-
+        public DbSet<CarTypeMaster> CarTypeMasters { get; set; }
+        public DbSet<AddOnMaster> AddOnMasters { get; set; } 
+        public DbSet<InvoiceDetailTableReturn> InvoiceDetailTableReturns { get;}
+        public DbSet<InvoiceHeaderTableHandover> InvoiceHeaderTableHandovers { get; set; }
+        public DbSet<MembershipRegistration> MembershipRegistrations { get; set; }
+        
     }
 }
